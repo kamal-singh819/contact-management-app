@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import WorldMap from './WorldMap';
-// import 'leaflet/dist/leaflet.css';
+import 'leaflet/dist/leaflet.css';
 
 export interface DataType {
     country: string,
@@ -48,7 +48,7 @@ const LeafLetMap = () => {
     else if (isLoading) return <div>Loading....</div>
 
     return (
-        <div className='border-2 border-blue-500 w-full  h-[100vh] pt-40 m-auto'>
+        <div className='border-1 border-blue-500 w-full m-auto'>
             <MapContainer className="m-auto w-full  border-blue-700" bounds={[[-60, -180], [85, 180]]} zoom={12} center={[userLocation.latitude, userLocation.longitude]} scrollWheelZoom={true} >
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

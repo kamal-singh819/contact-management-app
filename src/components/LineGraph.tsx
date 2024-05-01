@@ -44,7 +44,7 @@ const LineGraph = () => {
         }]
     }
     return (
-        <div className='mb-10'>
+        <div className='mb-10 border-1 border-blue-500 w-full m-auto'>
             <CanvasJSChart options={options} />
         </div>
     );
