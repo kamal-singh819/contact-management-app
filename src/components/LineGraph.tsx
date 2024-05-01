@@ -18,7 +18,6 @@ const LineGraph = () => {
     useEffect(() => {
         if (data) {
             const arr = Object.entries(data.cases).map(([key, value]) => ({ date: key, totalCases: value }));
-            // arr.splice(0, 900);
             setDataPoints(arr as DataType[]);
         }
     }, [data]);
@@ -36,7 +35,7 @@ const LineGraph = () => {
             title: "No. of cases",
         },
         axisX: {
-            title: "Date wise",
+            title: "Date",
         },
         data: [{
             type: "line",

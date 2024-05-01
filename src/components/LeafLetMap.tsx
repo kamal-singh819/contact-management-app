@@ -26,7 +26,6 @@ const LeafLetMap = () => {
     useEffect(() => {
         if (data) {
             const arr = data.map((ele: any) => ({ country: ele.country, longitude: ele.countryInfo.long, latitude: ele.countryInfo.lat, activeCases: ele.active, recovered: ele.recovered, deaths: ele.deaths }));
-            console.log(arr);
             setCountriesData(arr as DataType[]);
         }
     }, [data]);
@@ -51,7 +50,7 @@ const LeafLetMap = () => {
     });
 
     return (
-        <MapContainer center={[0, 0]} zoom={2} scrollWheelZoom={false} style={{ height: '100vh', width: '100vw' }}>
+        <MapContainer center={[0, 0]} zoom={3} scrollWheelZoom={false}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             {markers.map((marker, index) => (
                 <Marker key={index} position={marker.position}>

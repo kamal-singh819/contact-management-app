@@ -6,7 +6,7 @@ interface RouteItem {
 }
 const Navbar = () => {
     const navigate = useNavigate();
-    const [currentNav, setCurrentNav] = useState('/');
+    const [currentNav, setCurrentNav] = useState(window.location.pathname);
     const routes: RouteItem[] = [{ route: '/', name: "Contacts" }, { route: '/maps-and-charts', name: "Maps & Charts" }];
     const handleButtonClick = (ele: RouteItem) => {
         setCurrentNav(ele.route);
