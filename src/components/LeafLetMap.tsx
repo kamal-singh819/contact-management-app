@@ -1,19 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer } from 'react-leaflet';
+import WorldMap from './WorldMap';
+// import 'leaflet/dist/leaflet.css';
 
-interface DataType {
+export interface DataType {
     country: string,
     longitude: number,
     latitude: number,
     activeCases: number,
     recovered: number,
     deaths: number
-}
-interface MarkerDataType {
-    position: [number, number];
-    country: string;
-    popUpContent: string;
 }
 
 const LeafLetMap = () => {
@@ -50,32 +47,14 @@ const LeafLetMap = () => {
     if (error) return <div>Request Failed</div>
     else if (isLoading) return <div>Loading....</div>
 
-    const markers: MarkerDataType[] = countriesData.map(country => {
-        const { country: name, activeCases, deaths, recovered } = country;
-        const popUpContent = `
-            <div>
-                <h2>${name}</h2>
-                <p>Active Cases: ${activeCases}</p>
-                <p>Deaths: ${deaths}</p>
-                <p>Recovered: ${recovered}</p>
-            </div>`;
-
-        return {
-            position: [country.latitude, country.longitude],
-            country: name,
-            popUpContent: popUpContent
-        }
-    });
-
     return (
-        <div className='p-20 w-[100vw] '>
-            <MapContainer center={[userLocation.latitude, userLocation.longitude]} zoom={3} style={{ width: "100%" }}>
-                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                {markers.map((marker) => (
-                    <Marker key={marker.country} position={marker.position}>
-                        <Popup>{marker.popUpContent}</Popup>
-                    </Marker>
-                ))}
+        <div className='border-2 border-blue-500 w-full  h-[100vh] pt-40 m-auto'>
+            <MapContainer className="m-auto w-full  border-blue-700" bounds={[[-60, -180], [85, 180]]} zoom={12} center={[userLocation.latitude, userLocation.longitude]} scrollWheelZoom={true} >
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+                />
+                <WorldMap countriesData={countriesData} />
             </MapContainer>
         </div>
     )
